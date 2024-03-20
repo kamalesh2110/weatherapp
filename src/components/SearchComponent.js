@@ -8,12 +8,18 @@ export const SearchComponent = () => {
         setCityName(value)
     }
     const weatherAPIDetails= async()=>{
+       try {
          const weatherdetails = await weatherAPIdetailcall(cityName)
-         setWeatherInfo(weatherdetails.data.days[0]) 
+         setWeatherInfo(weatherdetails.data.days[0])} 
+         catch(error){
+            alert("please enter correct city")
+            setCityName("")
+            setWeatherInfo({})    
+         }
     }
   return (
     <div>
-        <input type='text' placeholder='Enter City Name' onChange={(e)=>{
+        <input  id="citynameId"type='text' value={cityName} placeholder='Enter City Name' onChange={(e)=>{
             cityNameHandler(e.target.value)
         }}></input>
         <button onClick={()=>{
